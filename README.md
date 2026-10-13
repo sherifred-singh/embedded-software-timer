@@ -1,6 +1,6 @@
 ﻿# ⏱️ Embedded Non-Blocking Software Timer Queue in C
 
-[![C/C++ Software Timer CI](https://github.com/Sherifred123/embedded-software-timer/actions/workflows/ci.yml/badge.svg)](https://github.com/Sherifred123/embedded-software-timer/actions/workflows/ci.yml)
+[![C/C++ Software Timer CI](https://github.com/sherifred-singh/embedded-software-timer/actions/workflows/ci.yml/badge.svg)](https://github.com/sherifred-singh/embedded-software-timer/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 A lightweight, deterministic **Tick-Based Software Timer Module** written in C99 for **Microchip PIC18**, **STM32**, and **ESP32** microcontrollers.
@@ -28,3 +28,4 @@ make
 
 ## 📜 License
 Released under the [MIT License](LICENSE). Designed and maintained by **Sherifred Singh**.
+
