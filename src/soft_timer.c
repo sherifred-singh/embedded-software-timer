@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @file soft_timer.c
  * @brief Implementation of tick-based non-blocking software timer.
  * @author Sherifred Singh
@@ -77,8 +77,9 @@ void soft_timer_tick(uint32_t elapsed_ticks) {
     soft_timer_t *curr = g_timer_list_head;
     while (curr != NULL) {
         if (curr->state == TIMER_STATE_RUNNING) {
-            /* Check if expired (handles 32-bit tick roll-over) */
-            if ((int32_t)(g_system_ticks - curr->expiry_tick) >= 0) {
+            /* Check if expired (handles 32-bit tick roll-over and multi-tick increments) */
+            while ((curr->state == TIMER_STATE_RUNNING) &&
+                   ((int32_t)(g_system_ticks - curr->expiry_tick) >= 0)) {
                 if (curr->callback != NULL) {
                     curr->callback(curr->user_arg);
                 }
@@ -87,6 +88,7 @@ void soft_timer_tick(uint32_t elapsed_ticks) {
                     curr->expiry_tick += curr->period_ticks;
                 } else {
                     curr->state = TIMER_STATE_EXPIRED;
+                    break;
                 }
             }
         }
