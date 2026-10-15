@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @file test_timer.c
  * @brief Unit tests for Software Timer Module.
  * @author Sherifred Singh
@@ -60,8 +60,18 @@ int main(void) {
     assert(g_periodic_count == 2); /* Should not increment while stopped */
     printf("PASSED [OK]\n");
 
+    printf("[TEST 5] Rapid Cancel & Re-arm Stress Test (1000 iterations)... ");
+    for (int i = 0; i < 1000; i++) {
+        assert(soft_timer_start(&t_periodic));
+        soft_timer_tick(1);
+        soft_timer_stop(&t_periodic);
+    }
+    /* Period is 2, and timer was stopped after 1 tick each time, so zero extra expirations should occur */
+    assert(g_periodic_count == 2);
+    printf("PASSED [OK]\n");
+
     printf("\n=======================================================\n");
-    printf(" 🎉 ALL SOFTWARE TIMER TESTS PASSED! (4/4)\n");
+    printf(" 🎉 ALL SOFTWARE TIMER TESTS PASSED! (5/5)\n");
     printf("=======================================================\n\n");
 
     return 0;
